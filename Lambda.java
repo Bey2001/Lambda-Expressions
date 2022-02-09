@@ -91,35 +91,36 @@ public class Lambda {
             System.out.println("No parameters here!");
         };
 
-        //Simple case of a String-returning one-parameter Lambda Expression
+        // Simple case of a String-returning one-parameter Lambda Expression
         StringFunction writeMessage = (String message) -> {
             return "The message is as follows:\n" + message;
         };
 
-        //Simple case of a two-parameter Lambda Expression
+        // Simple case of a two-parameter Lambda Expression
         DualFunction multiplication = (int a, int b) -> {
             return a * b;
         };
 
         // Switch statement for various outcomes based on the first command line
         // argument
-        // Above functions are defined where they are because the linter will give
+        // Above functions are defined where they are because the linter will
+        // give
         // syntax errors if placed in switch statement
         switch (args[0]) {
 
-            //Use of zero-parameter Lambda Expression
+            // Use of zero-parameter Lambda Expression
             case "0":
                 empty.run();
                 break;
 
-            //Use of single-parameter Lambda Expression
+            // Use of single-parameter Lambda Expression
             case "1":
                 String message = writeMessage.run("Tada!  This is the result of another Lambda Expression");
                 message = exclaim.run(message);
                 System.out.println(message);
                 break;
 
-            //Use of two-parameter Lambda Expression
+            // Use of two-parameter Lambda Expression
             case "2":
                 int a = 99;
                 int b = 101;
@@ -127,24 +128,32 @@ public class Lambda {
                 System.out.println("The product of " + a + " and " + b + " is " + product);
                 break;
 
-            //Example using ArrayList.forEach() method
+            // Example using ArrayList.forEach() method
             case "3":
                 exList();
                 break;
 
-            //Example using Consumer for ArrayList.forEach() method
+            // Example using Consumer for ArrayList.forEach() method
             case "4":
                 exConsumerList();
                 break;
 
-            //Example using a method call to a locally-defined Lambda Expression
+            // Example using a method call to a locally-defined Lambda
+            // Expression
             case "5":
                 exMethod();
                 break;
 
-            //Example using a method call to a statically-defined Lambda Expression
+            // Example using a method call to a statically-defined Lambda
+            // Expression
             case "6":
                 exStaticMethod();
+                break;
+
+            // Example that cannot use a MessyFunction interface because it
+            // simply does not work!
+            case "7":
+                exMessy();
                 break;
 
             default:
@@ -155,7 +164,7 @@ public class Lambda {
         printFormatted("All done", exclaim);
     }
 
-    /** 
+    /**
      * Method showcasing the use of the forEach() method of the ArrayList class
      */
     public static void exList() {
@@ -172,8 +181,8 @@ public class Lambda {
     }
 
     /**
-     * Method showcasing the use of a Consumer object in the forEach() method 
-     *  of the ArrayList class
+     * Method showcasing the use of a Consumer object in the forEach() method
+     * of the ArrayList class
      */
     public static void exConsumerList() {
         ArrayList<Double> list = new ArrayList<Double>();
@@ -211,6 +220,22 @@ public class Lambda {
     public static void exStaticMethod() {
         printFormatted("Static hello", Lambda.exclaim);
         printFormatted("Static hello", Lambda.ask);
+    }
+
+    /**
+     * Method describing how an overloaded/messy interface must not be used when
+     * working with Lambda Expressions
+     */
+    public static void exMessy() {
+        // MessyFunction mess = () -> {
+        // System.out.println("This is a mess. Don't use MessyFunctions.");
+        // };
+
+        // Above code is commented out because MessyFunctions are not functional
+        // Interfaces. Functional Interfaces must have one and only one run()
+        // method.
+        System.out.println("Do not try to use an overloaded/messy interface."
+                + "They do not work!");
     }
 
     /**
